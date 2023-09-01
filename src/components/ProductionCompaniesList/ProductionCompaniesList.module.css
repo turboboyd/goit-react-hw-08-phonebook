@@ -1,0 +1,18 @@
+.details_company {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  list-style: none;
+  border-radius: 10px;
+  align-items: center;
+  border: 1px solid var(--header-white-color);;
+  border-radius: 16px;
+  padding: 20px;
+  width: 100%;
+}
+
+.details_company img {
+    width: 150px;
+    background: var(--header-white-color);
+    padding: 8px;
+}

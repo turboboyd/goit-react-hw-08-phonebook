@@ -1,0 +1,117 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+}
+
+.nav_menu {
+  display: flex;
+  gap: 16px;
+}
+
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo_name {
+  color: var(--header-red-color);
+  font-family: Poppins;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: 3.36px;
+  transition: color 0.3s ease; 
+}
+.logo_name:hover, .logo_name:focus {
+  color: var(--header-white-color);
+}
+
+.icon_film {
+  font-size: 24px;
+  fill: var(--header-white-color);
+  transition: fill 0.3s ease; 
+}
+
+.logo_name:hover ~ .icon_film,
+.logo_name:focus ~ .icon_film {
+  fill: var(--header-red-color);
+}
+
+
+.icon_film svg {
+  width: 200px;
+}
+
+
+.header {
+  padding: 16px 0;
+}
+
+.nav_menu {
+  gap: 12px;
+}
+
+.nav_link {
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+
+.logo_name {
+  font-size: 28px;
+  letter-spacing: 2.8px;
+}
+
+.icon_film {
+  font-size: 20px;
+}
+
+@media (min-width: 325px) and (max-width: 768px) {
+  .nav_menu {
+    gap: 8px;
+  }
+
+  .nav_link {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .logo_name {
+    font-size: 24px;
+    letter-spacing: 2.4px;
+  }
+
+  .icon_film {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1440px) {
+  .header {
+    padding: 20px 0;
+  }
+
+  .nav_menu {
+    gap: 14px;
+  }
+
+  .nav_link {
+    padding: 14px 22px;
+    font-size: 16px;
+  }
+
+  .logo_name {
+    font-size: 28px;
+    letter-spacing: 2.8px;
+  }
+
+  .icon_film {
+    font-size: 22px;
+  }
+}

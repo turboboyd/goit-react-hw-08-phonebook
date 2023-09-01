@@ -1,0 +1,36 @@
+.actor_wrap {
+  display: flex;
+  gap: 16px;
+}
+
+.details {
+  width: 500px;
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  color: var(--header-white-color);
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.details_text {
+  color: var(--header-white-color);
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.actor_profile {
+  border-radius: 20px;
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.CgProfile {
+  font-size: 100px;
+  color: white;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,10 @@
+.scroll_to_top {
+  position: relative;
+  align-items: center;
+  background-color: var(--header-white-color);
+  border-radius: 50%;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
