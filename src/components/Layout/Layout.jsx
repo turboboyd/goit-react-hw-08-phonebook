@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import css from './Container.module.css';
 import Loader from 'components/Loader/Loader';
 import { useSelector } from 'react-redux';
-import { selectStatus, selectToken, selectError, selectState } from 'redux/auch';
+import { selectStatus, selectToken } from 'redux/auch';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
