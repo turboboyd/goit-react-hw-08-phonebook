@@ -1,20 +1,32 @@
-import Header from 'components/Header/Header';
+// import Header from 'components/Header/Header';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import css from './Container.module.css';
 import Loader from 'components/Loader/Loader';
+import { useSelector } from 'react-redux';
+import { selectStatus, selectToken, selectError, selectState } from 'redux/auch';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Layout() {
+  const status = useSelector(selectStatus);
+   const token = useSelector(selectToken);
+   console.log('token: ', token);
   return (
     <>
-      <div className={css.container}>
+      {/* <div className={css.container}>
         <Header />
-      </div>
+      </div> */}
+      <ToastContainer />
       <main>
         <div className={css.container}>
-          <Suspense fallback={<Loader />}>
-            <Outlet />
-          </Suspense>
+          {status === 'loading' ? (
+            <Loader />
+          ) : (
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
+          )}
         </div>
       </main>
     </>

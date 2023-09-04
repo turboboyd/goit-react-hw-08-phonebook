@@ -211,3 +211,7 @@ input {
 	transform: translateX(20%);
 }
 
+.error_input {
+  border: 1px solid red;
+}
+
