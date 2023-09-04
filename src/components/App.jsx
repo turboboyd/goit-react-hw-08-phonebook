@@ -18,6 +18,7 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route
+          index
           path="login"
           element={
             <RestrictedRoute element={<LoginForm />} redirectTo="/contacts" />
