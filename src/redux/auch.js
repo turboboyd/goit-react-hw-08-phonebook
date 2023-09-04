@@ -182,6 +182,7 @@ export const selectIsLoggedIn = state => state.auch.isLoggedIn;
 const auchPersistConfig = {
   key: 'auch',
   storage,
+  whitelist: ['token', 'isLoggedIn'],
 };
 
 export const persistedAuchReducer = persistReducer(
