@@ -55,7 +55,6 @@ export default function SignIn() {
           className={errors.password ? `${css.error_input}` : ''}
         />
         <button type="submit">Sign In</button>
-        <Link to="/contacts">gsagsag</Link>
       </form>
     </>
   );

@@ -70,7 +70,6 @@ export default function SignUp() {
           className={errors.password ? `${css.error_input}` : ''}
         />
         <button type="submit">Sign Up</button>
-        <Link to={'/contacts'}>fsafaf</Link>
       </form>
     </>
   );
