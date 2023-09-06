@@ -13,12 +13,12 @@ import {
 import { persistedAuchReducer } from './auch';
 import { filterReducer } from './filterSlice';
 
-import { persistedContactsReducer } from './contactsSlice';
+import { contactsReducer } from './contactsSlice';
 
 const reducer = combineReducers({
   auch: persistedAuchReducer,
   filter: filterReducer,
-  contacts: persistedContactsReducer,
+  contacts: contactsReducer,
 });
 
 export const store = configureStore({

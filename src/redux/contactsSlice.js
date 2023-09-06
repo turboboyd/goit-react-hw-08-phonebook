@@ -105,7 +105,7 @@ export const { setContacts, addContacts, deleteContacts } =
   contactsSlice.actions;
 
 export const selectContacts = state => state.contacts.contacts;
-export const selectStatus = state => state.contacts.status;
+// export const selectStatus = state => state.contacts.status;
 export const selectError = state => state.contacts.error;
 
 const persistConfig = {

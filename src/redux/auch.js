@@ -22,7 +22,6 @@ export const auchSignUp = createAsyncThunk(
       }
       token.set(response.data.token);
       const data = response.data;
-      console.log('data: ', data);
 
       if (response.status === 201) {
         return data;
@@ -45,7 +44,6 @@ export const auchSignIn = createAsyncThunk(
     try {
       const response = await axios.post(`/users/login`, credentials);
       token.set(response.data.token);
-      console.log('response.data.token): ', response.data.token);
       return response.data;
     } catch (error) {
       if (error.response.status === 400) {
@@ -93,12 +91,10 @@ export const fetchCurrentUser = createAsyncThunk(
     const persistToken = state.auch.token;
     console.log('persistToken: ', persistToken);
     if (persistToken === null || persistToken === '') {
-      console.log('stop');
-      return state;
+      return rejectWithValue('Ooops, You are not registered yet');
     }
-    token.set(persistToken);
-
     try {
+      token.set(persistToken);
       const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
@@ -111,78 +107,96 @@ export const fetchCurrentUser = createAsyncThunk(
 const initialState = {
   user: { name: null, email: null },
   token: null,
-  status: null,
   error: null,
   isLoggedIn: false,
+  isRefreshing: false,
+  isLoading: true,
 };
 
 const setError = (state, action) => {
-  state.status = 'rejected';
   state.error = action.payload;
-  state.isLoggedIn = true;
+  state.isLoading = false;
 };
 
 export const authSlice = createSlice({
   name: 'authSlice',
   initialState,
+  reducers: {
+    setIsLoggedIn: (state, action) => {
+      state.isLoggedIn = action.payload;
+    },
+  },
   extraReducers: {
     [auchSignUp.pending]: state => {
-      state.status = 'loading';
       state.error = null;
+      state.isLoading = true;
       state.isLoggedIn = false;
     },
     [auchSignUp.fulfilled]: (state, action) => {
-      state.status = 'resolved';
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
+      state.isLoading = false;
     },
     [auchSignUp.rejected]: setError,
 
     [auchSignIn.pending]: state => {
-      state.status = 'loading';
       state.error = null;
+      state.isLoading = true;
       state.isLoggedIn = false;
     },
     [auchSignIn.fulfilled]: (state, action) => {
-      state.status = 'resolved';
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
+      state.isLoading = false;
     },
-    [auchSignIn.rejected]: setError,
+    [auchSignIn.rejected]: (state, action) => {
+      state.isRefreshing = false;
+      state.error = action.payload;
+      state.isLoading = false;
+    },
     [logOut.fulfilled]: state => {
       state.user = {};
       state.token = '';
-      state.status = 'resolved';
       state.error = null;
       state.isLoggedIn = false;
+      state.isLoading = false;
     },
     [logOut.rejected]: setError,
     [fetchCurrentUser.pending]: state => {
-      state.status = 'loading';
       state.error = null;
+      state.isLoading = true;
+      state.isRefreshing = true;
     },
     [fetchCurrentUser.fulfilled]: (state, action) => {
-      state.status = 'resolved';
       state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
+      state.isRefreshing = false;
+      state.isLoading = false;
     },
-    [fetchCurrentUser.rejected]: setError,
+    [fetchCurrentUser.rejected]: (state, action) => {
+      state.isRefreshing = false;
+      state.error = action.payload;
+      state.isLoading = false;
+    },
   },
 });
 
 const authReducer = authSlice.reducer;
 
-
+export const selectUserName = state => state.auch.user.name;
 export const selectToken = state => state.auch.token;
-export const selectStatus = state => state.auch.status;
 export const selectError = state => state.auch.error;
 export const selectIsLoggedIn = state => state.auch.isLoggedIn;
+export const selectIsRefreshing = state => state.auch.isRefreshing;
+export const selectIsLoading = state => state.auch.isLoading;
 
 const auchPersistConfig = {
   key: 'auch',
   storage,
-  whitelist: ['token', 'isLoggedIn'],
+  // whitelist: ['token'],
 };
 
 export const persistedAuchReducer = persistReducer(

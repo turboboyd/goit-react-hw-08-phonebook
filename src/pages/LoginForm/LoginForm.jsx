@@ -5,7 +5,7 @@ import SignUp from 'components/SignUp/SignUp';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
-import { selectStatus, selectError } from 'redux/auch';
+import { selectIsLoading, selectError } from 'redux/auch';
 
 import { toast } from 'react-toastify';
 
@@ -14,7 +14,7 @@ function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
-  const status = useSelector(selectStatus);
+  // const status = useSelector(selectIsLoading);
 
   const error = useSelector(selectError);
   const handleSignUpClick = () => {
@@ -74,7 +74,7 @@ function Login() {
             </div>
           </div>
         </div>
-        {status === 'rejected' && toast.error(`Error: ${error}`)}
+        {/* {status === 'rejected' && toast.error(`Error: ${error}`)} */}
       </div>
     );
 }

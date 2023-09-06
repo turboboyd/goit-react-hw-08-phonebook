@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import css from './Header.module.css';
 import React from 'react';
-import {StyledLink} from './Header.styled.js';
+import { useSelector } from 'react-redux';
 import { BsFilm } from 'react-icons/bs';
+import { selectUserName } from 'redux/auch';
 
 export default function Header() {
+  const userName = useSelector(selectUserName);
+  console.log('userName: ', userName);
   return (
     <header className={css.header}>
       <Link to="/">
@@ -13,14 +16,9 @@ export default function Header() {
           <BsFilm className={css.icon_film} />
         </div>
       </Link>
-      <nav className={css.nav_menu}>
-        <StyledLink className={css.nav_link} to="/">
-          Home
-        </StyledLink>
-        <StyledLink className={css.nav_link} to="/movies">
-          Movies
-        </StyledLink>
-      </nav>
+      <div>
+        <p>{userName}</p>
+      </div>
     </header>
   );
 }
