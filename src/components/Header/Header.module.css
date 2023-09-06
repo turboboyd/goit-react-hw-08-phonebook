@@ -18,7 +18,6 @@
   gap: 8px;
 }
 .logo_name {
-  color: var(--header-red-color);
   font-family: Poppins;
   font-size: 32px;
   font-style: normal;

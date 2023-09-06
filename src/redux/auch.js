@@ -98,8 +98,7 @@ export const fetchCurrentUser = createAsyncThunk(
       const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
-      // return rejectWithValue(error.message);
-      return;
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -111,11 +110,13 @@ const initialState = {
   isLoggedIn: false,
   isRefreshing: false,
   isLoading: true,
+  status: null,
 };
 
 const setError = (state, action) => {
   state.error = action.payload;
   state.isLoading = false;
+  state.status = 'rejected';
 };
 
 export const authSlice = createSlice({
@@ -131,12 +132,14 @@ export const authSlice = createSlice({
       state.error = null;
       state.isLoading = true;
       state.isLoggedIn = false;
+      state.status = 'pending';
     },
     [auchSignUp.fulfilled]: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
       state.isLoading = false;
+      state.status = 'fulfilled';
     },
     [auchSignUp.rejected]: setError,
 
@@ -144,17 +147,20 @@ export const authSlice = createSlice({
       state.error = null;
       state.isLoading = true;
       state.isLoggedIn = false;
+      state.status = 'pending';
     },
     [auchSignIn.fulfilled]: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
       state.isLoading = false;
+      state.status = 'fulfilled';
     },
     [auchSignIn.rejected]: (state, action) => {
       state.isRefreshing = false;
       state.error = action.payload;
       state.isLoading = false;
+      state.status = 'rejected';
     },
     [logOut.fulfilled]: state => {
       state.user = {};
@@ -162,6 +168,7 @@ export const authSlice = createSlice({
       state.error = null;
       state.isLoggedIn = false;
       state.isLoading = false;
+      state.status = 'fulfilled';
     },
     [logOut.rejected]: setError,
     [fetchCurrentUser.pending]: state => {
@@ -192,11 +199,12 @@ export const selectError = state => state.auch.error;
 export const selectIsLoggedIn = state => state.auch.isLoggedIn;
 export const selectIsRefreshing = state => state.auch.isRefreshing;
 export const selectIsLoading = state => state.auch.isLoading;
+export const selectStatus = state => state.auch.status;
 
 const auchPersistConfig = {
   key: 'auch',
   storage,
-  // whitelist: ['token'],
+  whitelist: ['token'],
 };
 
 export const persistedAuchReducer = persistReducer(
