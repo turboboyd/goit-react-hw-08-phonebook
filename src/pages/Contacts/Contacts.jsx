@@ -9,7 +9,6 @@ import {
   selectContacts,
   deleteContact,
   fetchContacts,
-  selectIsLoading,
   selectError,
 } from '../../redux/contactsSlice.js';
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { auchSignUp } from '../../redux/auch';
 import css from './SignUp.module.css';
-import { Link } from 'react-router-dom';
+
 
 
 import validator from 'validator';
