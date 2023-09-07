@@ -1,4 +1,7 @@
 @import '~normalize.css';
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
 :root {
   --main-bgr-color: #190840;
   --main-bgr-color-accent: #500d3b;

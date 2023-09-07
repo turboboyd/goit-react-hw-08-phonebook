@@ -9,9 +9,14 @@ const token = {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   unset() {
-    axios.defaults.headers.common.Authorization = null;
+    return (axios.defaults.headers.common.Authorization = '');
   },
 };
+
+const clearAuth = () => {
+  axios.defaults.headers.common.Authorization = '';
+};
+
 export const auchSignUp = createAsyncThunk(
   'auth/auchSignUp',
   async (credentials, { rejectWithValue }) => {
@@ -54,30 +59,19 @@ export const auchSignIn = createAsyncThunk(
   }
 );
 
-const logOut = createAsyncThunk(
+export const logOut = createAsyncThunk(
   'auch/logOut',
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
-      const response = await axios.post(`/users/logout`, credentials);
-      if (!response.statusText) {
-        throw new Error('Failed to add User');
-      }
+      const response = await axios.post(`/users/logout`);
+      // if (!response.statusText) {
+      //   throw new Error('Failed to add User');
+      // }
 
-      token.unset();
-      console.log('token: ', token);
+      clearAuth();
       const data = response.data;
-      console.log('response.data: ', response.status);
-      console.log('data: ', data);
-      if (response.status === 201) {
-        const data = response.data;
-        return data;
-      } else if (response.status === 400) {
-        throw new Error('User creation error.');
-      } else if (response.status === 500) {
-        throw new Error('Server error.');
-      } else {
-        throw new Error(`Unexpected status code: ${response.status}`);
-      }
+      console.log('datarrr: ', data);
+      return data
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -93,10 +87,12 @@ export const fetchCurrentUser = createAsyncThunk(
     if (persistToken === null || persistToken === '') {
       return rejectWithValue('Ooops, You are not registered yet');
     }
+    token.set(persistToken);
     try {
       token.set(persistToken);
-      const { data } = await axios.get('/users/current');
-      return data;
+      const response = await axios.get('/users/current');
+      console.log('response: ', response.data);
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -163,25 +159,27 @@ export const authSlice = createSlice({
       state.status = 'rejected';
     },
     [logOut.fulfilled]: state => {
-      state.user = {};
-      state.token = '';
-      state.error = null;
+      state.user = { name: null, email: null };
+      state.token = null;
       state.isLoggedIn = false;
-      state.isLoading = false;
-      state.status = 'fulfilled';
+      state.error = null;
     },
-    [logOut.rejected]: setError,
+    [logOut.rejected]: (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+      state.status = 'rejected';
+    },
     [fetchCurrentUser.pending]: state => {
       state.error = null;
       state.isLoading = true;
       state.isRefreshing = true;
     },
     [fetchCurrentUser.fulfilled]: (state, action) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
+      state.user = action.payload;
       state.isLoggedIn = true;
-      state.isRefreshing = false;
       state.isLoading = false;
+      state.status = 'fulfilled';
+      state.isRefreshing = false;
     },
     [fetchCurrentUser.rejected]: (state, action) => {
       state.isRefreshing = false;

@@ -48,12 +48,12 @@ function Login() {
       <div className={css['overlay-container']}>
         <div className={css.overlay}>
           <div className={`${css['overlay-panel']} ${css['overlay-left']}`}>
-            <h2>Welcome Back!</h2>
-            <p>
+            <h2 className={css.title}>Welcome Back!</h2>
+            <p className={css.text}>
               To keep connected with us, please login with your personal info
             </p>
             <button
-              className={`${css.ghost} ${css.signIn}`}
+              className={`${css.button} ${css.ghost} ${css.signUp}`}
               id="signIn"
               onClick={handleSignInClick}
             >
@@ -61,10 +61,12 @@ function Login() {
             </button>
           </div>
           <div className={`${css['overlay-panel']} ${css['overlay-right']}`}>
-            <h2>Hello, Friend!</h2>
-            <p>Enter your personal data to create a personal account</p>
+            <h2 className={css.title}>Hello, Friend!</h2>
+            <p className={css.text}>
+              Enter your personal data to create a personal account
+            </p>
             <button
-              className={`${css.ghost} ${css.signUp}`}
+              className={`${css.button} ${css.ghost} ${css.signUp}`}
               id="signUp"
               onClick={handleSignUpClick}
             >

@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+/* @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 * {
 	box-sizing: border-box;
@@ -14,18 +14,14 @@ body {
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
 	margin: -20px 0 50px;
-}
+} */
 
-h1 {
-	font-weight: bold;
-	margin: 0;
-}
 
-h2 {
+.title {
 	text-align: center;
 }
 
-p {
+.text {
 	font-size: 14px;
 	font-weight: 100;
 	line-height: 20px;
@@ -33,18 +29,9 @@ p {
 	margin: 20px 0 30px;
 }
 
-span {
-	font-size: 12px;
-}
 
-a {
-	color: #333;
-	font-size: 14px;
-	text-decoration: none;
-	margin: 15px 0;
-}
 
-button {
+.button {
 	border-radius: 20px;
 	border: 1px solid #FF4B2B;
 	background-color: #FF4B2B;
@@ -56,32 +43,19 @@ button {
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
 }
-
-button:active {
+.button:active {
 	transform: scale(0.95);
 }
-
-button:focus {
+.button:focus {
 	outline: none;
 }
 
-button.ghost {
+.button.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
 }
 
-form {
-	background-color: #FFFFFF;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	padding: 0 50px;
-	height: 100%;
-	text-align: center;
-}
-
-input {
+.input {
 	background-color: #eee;
 	border: none;
 	padding: 12px 15px;
@@ -99,6 +73,7 @@ input {
 	width: 768px;
 	max-width: 100%;
 	min-height: 480px;
+	margin: 10vh auto;
 }
 
 .form-container {

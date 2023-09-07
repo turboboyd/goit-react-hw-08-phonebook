@@ -43,16 +43,16 @@ export default function SignUp() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <h1>Create Account</h1>
-        <span>or use your email for registration</span>
-        {errors.name && <div className="error">{errors.name}</div>}
+      <form onSubmit={handleSubmit} className={css.form}>
+        <h2 className={css.title}>Create Account</h2>
+        <span className={css.span}>or use your email for registration</span>
+        {errors.name && <div className={css.error}>{errors.name}</div>}
         <input
           type="text"
           placeholder="Name"
           onChange={e => setName(e.currentTarget.value)}
           autoComplete="Name"
-          className={errors.name ? 'error-input' : ''}
+          className={`${css.input} ${errors.name ? css.error_input : ''}`}
         />
         {errors.email && <div className="error">{errors.email}</div>}
         <input
@@ -60,16 +60,18 @@ export default function SignUp() {
           placeholder="Email"
           onChange={e => setEmail(e.currentTarget.value)}
           autoComplete="email"
-          className={errors.email ? 'error-input' : ''}
+          className={`${css.input} ${errors.email ? css.error_input : ''}`}
         />
         {errors.password && <div className="error">{errors.password}</div>}
         <input
           type="password"
           placeholder="Password"
           onChange={e => setPassword(e.currentTarget.value)}
-          className={errors.password ? `${css.error_input}` : ''}
+          className={`${css.input} ${errors.password ? css.error_input : ''}`}
         />
-        <button type="submit">Sign Up</button>
+        <button type="submit" className={css.button}>
+          Sign Up
+        </button>
       </form>
     </>
   );

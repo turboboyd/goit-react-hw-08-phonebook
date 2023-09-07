@@ -11,6 +11,7 @@ import {
   fetchContacts,
   selectError,
 } from '../../redux/contactsSlice.js';
+import { Container } from 'components/Сontainer/Container';
 
 export default function Contacts() {
   const filter = useSelector(selectFilter);
@@ -42,15 +43,16 @@ export default function Contacts() {
   };
 
   return (
-    <div className={css.container}>
-      <div className={css.wrapper}>
-        <h1 className={css.title}>Phonebook</h1>
-        <ContactForm />
-      </div>
-      <div className={css.wrapper}>
-        {/* {status === 'loading' && <h2>loading...</h2>} */}
-        {error && <h2>Phonebook</h2>}
-        {/* {status === 'resolved' && ( */}
+    <Container>
+      <div className={css.container}>
+        <div className={css.wrapper}>
+          <h1 className={css.title}>Phonebook</h1>
+          <ContactForm />
+        </div>
+        <div className={css.wrapper}>
+          {/* {status === 'loading' && <h2>loading...</h2>} */}
+          {error && <h2>Phonebook</h2>}
+          {/* {status === 'resolved' && ( */}
           <>
             <h2 className={css.title}>Contacts</h2>
             {contacts.length > 0 ? (
@@ -65,8 +67,9 @@ export default function Contacts() {
               <p>No contacts found</p>
             )}
           </>
-        {/* )} */}
+          {/* )} */}
+        </div>
       </div>
-    </div>
+    </Container>
   );
 }

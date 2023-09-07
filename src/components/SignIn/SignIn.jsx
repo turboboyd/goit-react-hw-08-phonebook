@@ -35,26 +35,28 @@ export default function SignIn() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <h1>Sign in</h1>
-        <span>or use your account</span>
-        {errors.email && <div className="error">{errors.email}</div>}
+      <form onSubmit={handleSubmit} className={css.form}>
+        <h2 className={css.title}>Sign in</h2>
+        <span className={css.span}>or use your account</span>
+        {errors.email && <div className={css.error}>{errors.email}</div>}
         <input
           type="email"
           placeholder="Email"
           onChange={e => setEmail(e.currentTarget.value)}
           autoComplete="email"
-          className={errors.email ? `${css.error_input}` : ''}
+          className={`${css.input} ${errors.email ? css.error_input : ''}`}
         />
-        {errors.password && <div className="error">{errors.password}</div>}
+        {errors.password && <div className={css.error}>{errors.password}</div>}
         <input
           type="password"
           placeholder="Password"
           onChange={e => setPassword(e.currentTarget.value)}
           autoComplete="password"
-          className={errors.password ? `${css.error_input}` : ''}
+          className={`${css.input} ${errors.password ? css.error_input : ''}`}
         />
-        <button type="submit">Sign In</button>
+        <button type="submit" className={css.button}>
+          Sign In
+        </button>
       </form>
     </>
   );

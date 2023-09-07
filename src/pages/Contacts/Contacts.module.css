@@ -1,12 +1,10 @@
-
 .container {
   display: flex;
-  justify-content: space-evenly;
-
+  justify-content: space-between;
 }
 
 .wrapper {
-  width: 400px;
+  max-width: 400px;
 }
 
 .title {
