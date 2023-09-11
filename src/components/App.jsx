@@ -8,8 +8,11 @@ import { fetchCurrentUser } from '../redux/auch';
 import Loader from './Loader/Loader';
 import { selectIsLoading } from 'redux/auch';
 import { useSelector } from 'react-redux';
+import NotFound from '../pages/NotFound/NotFound.jsx';
 const LoginForm = lazy(() => import('../pages/LoginForm/LoginForm'));
 const Contacts = lazy(() => import('../pages/Contacts/Contacts'));
+
+
 
 export const App = () => {
     const isLoading = useSelector(selectIsLoading);
@@ -18,7 +21,6 @@ export const App = () => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
   if (isLoading) {
-    // Если isLoading равно true, показываем компонент загрузки
     return <Loader />;
   }
 
@@ -28,24 +30,21 @@ export const App = () => {
         <Route
           index
           path="/login"
-          element={
-            <RestrictedRoute element={<LoginForm />} redirectTo="/contacts" />
-          }
+          element={<RestrictedRoute element={<LoginForm />} redirectTo="/" />}
         />
 
         <Route
           path="/register"
-          element={
-            <RestrictedRoute element={<LoginForm />} redirectTo="/contacts" />
-          }
+          element={<RestrictedRoute element={<LoginForm />} redirectTo="/" />}
           restricted
         />
 
         <Route
-          path="/contacts"
+          path="/"
           element={<PrivateRoute element={<Contacts />} redirectTo="/login" />}
         />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

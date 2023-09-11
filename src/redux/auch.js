@@ -32,7 +32,6 @@ export const auchSignUp = createAsyncThunk(
         return data;
       }
     } catch (error) {
-      console.log('errors: ', error);
       if (error.response.status === 400) {
         return rejectWithValue('User creation error.');
       } else if (error.response.status === 500) {
@@ -64,13 +63,9 @@ export const logOut = createAsyncThunk(
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios.post(`/users/logout`);
-      // if (!response.statusText) {
-      //   throw new Error('Failed to add User');
-      // }
 
       clearAuth();
       const data = response.data;
-      console.log('datarrr: ', data);
       return data
     } catch (error) {
       return rejectWithValue(error.message);
@@ -83,7 +78,7 @@ export const fetchCurrentUser = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     const state = getState();
     const persistToken = state.auch.token;
-    console.log('persistToken: ', persistToken);
+
     if (persistToken === null || persistToken === '') {
       return rejectWithValue('Ooops, You are not registered yet');
     }
@@ -91,7 +86,6 @@ export const fetchCurrentUser = createAsyncThunk(
     try {
       token.set(persistToken);
       const response = await axios.get('/users/current');
-      console.log('response: ', response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);

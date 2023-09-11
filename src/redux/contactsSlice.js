@@ -25,8 +25,6 @@ export const deleteContact = createAsyncThunk(
   async (id, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios.delete(`/contacts/${id}`);
-      console.log('response:del ', response);
-
       if (!response.statusText) {
         throw new Error(`Can't delete contact. Server errror.`);
       }
@@ -41,10 +39,8 @@ export const deleteContact = createAsyncThunk(
 export const pushContact = createAsyncThunk(
   'contacts/addContact',
   async (newContact, { rejectWithValue, dispatch }) => {
-    console.log('newContact: ', newContact);
     try {
       const response = await axios.post(`/contacts`, newContact);
-      console.log('newContact: ', newContact);
 
       if (!response.statusText) {
         throw new Error('Failed to add contact');

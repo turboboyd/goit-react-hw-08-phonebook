@@ -3,13 +3,13 @@ import css from './ContactForm.module.css';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { pushContact, selectContacts } from '../../redux/contactsSlice';
-import SubmitButton from '../SubmitButton/SubmitButton'
+import SubmitButton from '../SubmitButton/SubmitButton';
 
 export function ContactForm(props) {
   const loginInputId = nanoid();
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts); 
-  
+  const contacts = useSelector(selectContacts);
+
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 
@@ -23,8 +23,7 @@ export function ContactForm(props) {
   const hendleSubmit = e => {
     e.preventDefault();
     const newContact = { name, number: phone };
-    console.log('newContact: ', newContact);
-   const normalizedNewContact = newContact.name.toLowerCase();
+    const normalizedNewContact = newContact.name.toLowerCase();
     const contactExaminationthis = contacts.find(
       contact => contact.name.toLowerCase() === normalizedNewContact
     );
@@ -73,5 +72,3 @@ export function ContactForm(props) {
     </form>
   );
 }
-
-

@@ -16,7 +16,6 @@ import { Container } from 'components/Сontainer/Container';
 export default function Contacts() {
   const filter = useSelector(selectFilter);
   const contacts = useSelector(selectContacts);
-  // const stыаatus = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
   const dispatch = useDispatch();
@@ -50,9 +49,7 @@ export default function Contacts() {
           <ContactForm />
         </div>
         <div className={css.wrapper}>
-          {/* {status === 'loading' && <h2>loading...</h2>} */}
           {error && <h2>Phonebook</h2>}
-          {/* {status === 'resolved' && ( */}
           <>
             <h2 className={css.title}>Contacts</h2>
             {contacts.length > 0 ? (
@@ -67,7 +64,6 @@ export default function Contacts() {
               <p>No contacts found</p>
             )}
           </>
-          {/* )} */}
         </div>
       </div>
     </Container>

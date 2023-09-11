@@ -1,14 +1,47 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex-direction: row-reverse;
   padding: 24px 0;
+}
+
+
+.wrapper_login{
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.userName{
+  font-size: 24px;
+}
+.button {
+	border-radius: 20px;
+	border: 1px solid #FF4B2B;
+	background-color: #FF4B2B;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+.button:active {
+	transform: scale(0.95);
+}
+
+.button:focus {
+	outline: none;
 }
 
 .nav_menu {
   display: flex;
   gap: 16px;
 }
+
+
 
 
 

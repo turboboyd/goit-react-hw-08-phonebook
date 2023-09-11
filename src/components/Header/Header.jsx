@@ -1,8 +1,6 @@
-import { Link } from 'react-router-dom';
 import css from './Header.module.css';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { LiaAddressBookSolid } from 'react-icons/lia';
 import { selectUserName } from 'redux/auch';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../redux/auch';
@@ -19,15 +17,11 @@ export default function Header() {
   return (
     <Container>
       <header className={css.header}>
-        <Link to="/">
-          <div className={css.logo}>
-            <span className={css.logo_name}>Phonebook</span>
-            <LiaAddressBookSolid className={css.icon_film} />
-          </div>
-        </Link>
-        <div>
-          <p>{userName}</p>
-          <button onClick={handleLogout}>Log out</button>
+        <div className={css.wrapper_login}>
+          <p className={css.userName}>{userName}</p>
+          <button className={css.button} onClick={handleLogout}>
+            Log out
+          </button>
         </div>
       </header>
     </Container>
